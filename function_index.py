@@ -89,13 +89,13 @@ for file in files:
         for line in file_txt:
             if line.find('% First edit:') == 0 or line.find('# First edit:') == 0:
                 first_edit = line[14:-1]     # first edit
-                first_date = first_edit[0:10]
+                first_date = first_edit[:10]
                 first_time = first_edit[12:17]
                 first_ver  = first_edit[19:first_edit.find('/V')]
                 first_num  = first_edit[first_edit.find('/V')+1:-1]
             if line.find('%  Last edit:') == 0 or line.find('#  Last edit:') == 0:
                 last_edit = line[14:-1]      # last edit
-                last_date = last_edit[0:10]
+                last_date = last_edit[:10]
                 last_time = last_edit[12:17]
                 last_ver  = last_edit[19:last_edit.find('/V')]
                 last_num  = last_edit[last_edit.find('/V')+1:-1]
@@ -119,7 +119,7 @@ for file in files:
         ws.write(n,10, last_num)
         ws.write(n,11, nocl)
         l = l + nocl
-       
+
 # Close function index
 #-------------------------------------------------------------------------#
 ws.write(n+1, 2, 'Total Number of Code Lines')
