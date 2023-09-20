@@ -198,6 +198,12 @@ case 'setup'
     % Activate section overlay
     %---------------------------------------------------------------------%
     section = fullfile(spm('Dir'),'canonical','single_subj_T1.nii');
+    if is_octave
+        % return early as Octave cannot handle some interactive plotting
+        % see https://github.com/JoramSoch/MACS/issues/15
+        varargout = {hReg,xSPM};
+        return
+    end
     spm_sections(xSPM,hReg,section);
  
     % Store handles of graphics window objects
@@ -789,4 +795,21 @@ otherwise
     %---------------------------------------------------------------------%
     error('Unknown action string!');
 
+end
+end
+
+
+function status = is_octave()
+%
+% Returns true if the environment is Octave.
+%
+% FORMAT status = bids.internal.is_octave()
+%
+%     status - logical true if the environment is Octave.
+%
+persistent cacheval   % speeds up repeated calls
+if isempty (cacheval)
+    cacheval = (exist ('OCTAVE_VERSION', 'builtin') > 0);
+end
+status = cacheval;
 end
