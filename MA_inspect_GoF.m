@@ -201,6 +201,7 @@ case 'setup'
     if is_octave
         % return early as Octave cannot handle some interactive plotting
         % see https://github.com/JoramSoch/MACS/issues/15
+        fprintf('Skipping interactive visualisation in Octave.\n')
         varargout = {hReg,xSPM};
         return
     end
