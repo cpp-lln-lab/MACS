@@ -77,9 +77,10 @@ if strcmp(spm('Ver'),'SPM8')
     
 end;
 
-% If current version is SPM12
+% If current version is SPM12 or later (SPM25, SPM26, ...)
 %-------------------------------------------------------------------------%
-if strcmp(spm('Ver'),'SPM12')
+spm_major = sscanf(spm('Ver'),'SPM%d');
+if ~isempty(spm_major) && spm_major >= 12
     
     % Estimate non-sphericity
     %---------------------------------------------------------------------%
